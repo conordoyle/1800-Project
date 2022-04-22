@@ -1,0 +1,7 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/jlefkoff/Documents/Documents-jlmbp/GitHub/1800-Project/media/videos/animation/1080p60/partial_movie_files/Slides/450974505_2601856280_223132457.mp4'
+file 'file:/Users/jlefkoff/Documents/Documents-jlmbp/GitHub/1800-Project/media/videos/animation/1080p60/partial_movie_files/Slides/34786186_1672841892_4126343452.mp4'
+file 'file:/Users/jlefkoff/Documents/Documents-jlmbp/GitHub/1800-Project/media/videos/animation/1080p60/partial_movie_files/Slides/34786186_2544407737_178864297.mp4'
+file 'file:/Users/jlefkoff/Documents/Documents-jlmbp/GitHub/1800-Project/media/videos/animation/1080p60/partial_movie_files/Slides/34786186_532883976_223132457.mp4'
+file 'file:/Users/jlefkoff/Documents/Documents-jlmbp/GitHub/1800-Project/media/videos/animation/1080p60/partial_movie_files/Slides/34786186_1513268272_2319886907.mp4'
+file 'file:/Users/jlefkoff/Documents/Documents-jlmbp/GitHub/1800-Project/media/videos/animation/1080p60/partial_movie_files/Slides/34786186_1853876462_2319886907.mp4'
