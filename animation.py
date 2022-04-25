@@ -58,7 +58,7 @@ class FibEx(PPTXScene):
         )
         self.endSlide
 
-        brace_2 = Brace(fib[3:5], DOWN, color=BLUE)
+        brace_2 = Brace(fib[2:5], DOWN, color=BLUE)
         b2_txt = brace_2.get_tex("=3").set_color(BLUE)
 
         self.play(
@@ -78,46 +78,45 @@ class SimpleSternSeq(PPTXScene):
         title_short = Title(r"Stern-Brocot Sequence")
         self.add(title_short)
 
-        fib = MathTex(r"1",r"+",r"1",r"+",r"2",r"+",r"5",r"+",r"\cdots")
+        fib = MathTex()
+
+        n = 15
+        BrocotSequence = [1,1]
+
+        #loop to generate the stern brocot sequence
+        #see https://www.youtube.com/watch?v=DpwUVExX27E
+        for i in range(1,  n):
+            
+            considered_element = BrocotSequence[i]
+            precedent = BrocotSequence[i-1]
+    
+            # adding sum of considered element and its precedent
+            BrocotSequence.append(considered_element + precedent)
+            
+            # adding next considered element
+            BrocotSequence.append(considered_element)
+
+        #convert the ints to strings
+        for i in range(0, len(BrocotSequence)):
+            BrocotSequence[i] = str(BrocotSequence[i])
+
+        #add '+' between each element
+        for i in range(0, len(BrocotSequence)):
+            if i == 0:
+                BrocotSequence[i] = "1"
+            elif i % 2 == 0:
+                fib.add(MathTex(r"+"))
+            else:
+                fib.add(MathTex(BrocotSequence[i]))
         
-        self.play(Write(fib[0]))
-        self.endSlide()
-
+    
+        fib.add(MathTex(r"\cdots"))
+        
         self.play(
-            Write(fib[1:3])
-        )
-        self.endSlide
-
-        brace_1 = Brace(fib[0:3], DOWN, color=BLUE)
-        b1_txt = brace_1.get_tex("=2").set_color(BLUE)
-
-        self.play(
-            GrowFromCenter(brace_1),
-            Write(b1_txt) 
+            fib.animate.arrange_submobjects(RIGHT, buff=0.1),
         )
         self.endSlide()
-
-        self.play(
-            FadeOut(brace_1, b1_txt),
-            Write(fib[3:5])
-        )
-        self.endSlide
-
-        brace_2 = Brace(fib[2:5], DOWN, color=BLUE)
-        b2_txt = brace_2.get_tex("=3").set_color(BLUE)
-
-        self.play(
-            GrowFromCenter(brace_2),
-            Write(b2_txt)
-        )
-        self.endSlide()
-
-        self.play(
-            FadeOut(brace_2, b2_txt),
-            Write(fib[5:9])
-        )
-        self.endSlide()
-
+        
 # define the set of slides you want
 slides = [
     TitleSlide,
