@@ -78,7 +78,7 @@ class SimpleSternSeq(PPTXScene):
         title_short = Title(r"Stern-Brocot Sequence")
         self.add(title_short)
 
-        fib = MathTex()
+        brocot_seq = MathTex()
 
         n = 15
         BrocotSequence = [1,1]
@@ -105,15 +105,30 @@ class SimpleSternSeq(PPTXScene):
             if i == 0:
                 BrocotSequence[i] = "1"
             elif i % 2 == 0:
-                fib.add(MathTex(r"+"))
+                brocot_seq.add(MathTex(r"+"))
             else:
-                fib.add(MathTex(BrocotSequence[i]))
+                brocot_seq.add(MathTex(BrocotSequence[i]))
         
     
-        fib.add(MathTex(r"\cdots"))
+        brocot_seq.add(MathTex(r"\cdots"))
         
         self.play(
-            fib.animate.arrange_submobjects(RIGHT, buff=0.1),
+            brocot_seq.animate.arrange_submobjects(RIGHT, buff=0.1),
+        )
+        self.endSlide()
+
+        brocot_frac = MathTex()
+
+        for i in range(0, (len(BrocotSequence)//2)):
+            brocot_frac.add(MathTex(r"\frac {" +str(BrocotSequence[i])+ r"} {" +str(BrocotSequence[i+1])+ r"}"))
+            brocot_frac.add(MathTex(r"+"))
+            i += 1
+        
+        brocot_seq.move_to(UP)
+        brocot_frac.next_to(brocot_seq, DOWN, buff=1.5)
+
+        self.play(
+            brocot_frac.animate.arrange_submobjects(RIGHT, buff=0.1),
         )
         self.endSlide()
         
