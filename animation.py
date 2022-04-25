@@ -131,12 +131,39 @@ class SimpleSternSeq(PPTXScene):
             brocot_frac.animate.arrange_submobjects(RIGHT, buff=0.1),
         )
         self.endSlide()
+
+class mediantExample(PPTXScene):
+    def construct(self):
+        number_plane = NumberPlane(
+            x_range=[-10, 10, 1],
+            y_range=[-10, 10, 1],
+            background_line_style={
+                "stroke_color": TEAL,
+                "stroke_width": 4,
+                "stroke_opacity": 0.6
+            }
+        )
+
+        self.add(number_plane)
+
+        p1 = [10,10,0]
+        mediant_line = Line(ORIGIN,p1)
+
+        self.add(mediant_line)
+
+        self.play(
+            Create(number_plane),
+            Create(mediant_line)
+        )
+        self.endSlide()
+
         
 # define the set of slides you want
 slides = [
     TitleSlide,
     FibEx,
-    SimpleSternSeq
+    SimpleSternSeq,
+    mediantExample
 ]
 
 
