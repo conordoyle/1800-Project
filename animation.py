@@ -1,3 +1,5 @@
+from token import LEFTSHIFT
+from tokenize import group
 from manim import *
 from manim_pptx import *
 
@@ -26,36 +28,46 @@ class TitleSlide(PPTXScene):
       )
       self.endSlide()
 
-class TOC(PPTXScene):
+class FibEx(PPTXScene):
     def construct(self):
         title_short = Title(r"Fibbonaci Sequence")
         self.add(title_short)
 
-        fib_start = Tex(r"$1 + 1 + 2 + \cdots$")
-        self.add(fib_start)
-
-        self.play(FadeIn(fib_start))
+        fib_1 = Tex(r"$1$")
+        fib_2 = Tex(r"$1 + 1$")
+        fib_3 = Tex(r"$1 + 1 + 2$")
+        fib_4 = Tex(r"$1 + 1 + 2 + \cdots$")
+        
+        self.play(Write(fib_1))
         self.endSlide()
 
-class SquareToCircle(PPTXScene):
-    def construct(self):
-        circle = Circle()
-        square = Square()
-        square.flip(RIGHT)
-        square.rotate(-3 * PI / 8)
-        circle.set_fill(PINK, opacity=0.5)
+        self.play(
+            ReplacementTransform(fib_1, fib_2)
+        )
+        self.endSlide
 
-        self.play(Create(square))
+        brace_1 = Brace(fib_2, DOWN, color=BLUE)
+        b1_txt = brace_1.get_tex("=2").set_color(BLUE)
+
+        self.play(
+            GrowFromCenter(brace_1),
+            Write(b1_txt) 
+        )
         self.endSlide()
-        self.play(Transform(square, circle))
+
+        group_1 = VGroup(fib_2, b1_txt)
+        group_1.set_color(WHITE)
+
+        self.play(
+            FadeOut(brace_1, b1_txt),
+            ReplacementTransform(fib_2, fib_3)
+        )
         self.endSlide()
-        self.play(FadeOut(square))
-        self.endSlide()
+
 # define the set of slides you want
 slides = [
     TitleSlide,
-    TOC,
-    SquareToCircle
+    FibEx,
 ]
 
 
