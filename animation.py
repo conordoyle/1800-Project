@@ -33,20 +33,17 @@ class FibEx(PPTXScene):
         title_short = Title(r"Fibbonaci Sequence")
         self.add(title_short)
 
-        fib_1 = Tex(r"$1$")
-        fib_2 = Tex(r"$1 + 1$")
-        fib_3 = Tex(r"$1 + 1 + 2$")
-        fib_4 = Tex(r"$1 + 1 + 2 + \cdots$")
+        fib = MathTex(r"1",r"+",r"1",r"+",r"2",r"+",r"5",r"+",r"\cdots")
         
-        self.play(Write(fib_1))
+        self.play(Write(fib[0]))
         self.endSlide()
 
         self.play(
-            ReplacementTransform(fib_1, fib_2)
+            Write(fib[1:3])
         )
         self.endSlide
 
-        brace_1 = Brace(fib_2, DOWN, color=BLUE)
+        brace_1 = Brace(fib[0:3], DOWN, color=BLUE)
         b1_txt = brace_1.get_tex("=2").set_color(BLUE)
 
         self.play(
@@ -55,12 +52,69 @@ class FibEx(PPTXScene):
         )
         self.endSlide()
 
-        group_1 = VGroup(fib_2, b1_txt)
-        group_1.set_color(WHITE)
+        self.play(
+            FadeOut(brace_1, b1_txt),
+            Write(fib[3:5])
+        )
+        self.endSlide
+
+        brace_2 = Brace(fib[3:5], DOWN, color=BLUE)
+        b2_txt = brace_2.get_tex("=3").set_color(BLUE)
+
+        self.play(
+            GrowFromCenter(brace_2),
+            Write(b2_txt)
+        )
+        self.endSlide()
+
+        self.play(
+            FadeOut(brace_2, b2_txt),
+            Write(fib[5:9])
+        )
+        self.endSlide()
+
+class SimpleSternSeq(PPTXScene):
+    def construct(self):
+        title_short = Title(r"Stern-Brocot Sequence")
+        self.add(title_short)
+
+        fib = MathTex(r"1",r"+",r"1",r"+",r"2",r"+",r"5",r"+",r"\cdots")
+        
+        self.play(Write(fib[0]))
+        self.endSlide()
+
+        self.play(
+            Write(fib[1:3])
+        )
+        self.endSlide
+
+        brace_1 = Brace(fib[0:3], DOWN, color=BLUE)
+        b1_txt = brace_1.get_tex("=2").set_color(BLUE)
+
+        self.play(
+            GrowFromCenter(brace_1),
+            Write(b1_txt) 
+        )
+        self.endSlide()
 
         self.play(
             FadeOut(brace_1, b1_txt),
-            ReplacementTransform(fib_2, fib_3)
+            Write(fib[3:5])
+        )
+        self.endSlide
+
+        brace_2 = Brace(fib[2:5], DOWN, color=BLUE)
+        b2_txt = brace_2.get_tex("=3").set_color(BLUE)
+
+        self.play(
+            GrowFromCenter(brace_2),
+            Write(b2_txt)
+        )
+        self.endSlide()
+
+        self.play(
+            FadeOut(brace_2, b2_txt),
+            Write(fib[5:9])
         )
         self.endSlide()
 
@@ -68,6 +122,7 @@ class FibEx(PPTXScene):
 slides = [
     TitleSlide,
     FibEx,
+    SimpleSternSeq
 ]
 
 
