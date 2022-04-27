@@ -2,6 +2,7 @@ from token import LEFTSHIFT
 from tokenize import group
 from manim import *
 from manim_pptx import *
+from matplotlib.pyplot import title
 
 class TitleSlide(PPTXScene):
   def construct(self):
@@ -13,7 +14,7 @@ class TitleSlide(PPTXScene):
       discrete = Tex(r"CS1800 - Spring 2022", font_size=36)
       discrete.shift(0.5*DOWN)
 
-      title_short = Title(r"Fibbonaci Sequence")
+      title_short = Title(r"The History")
 
       self.play(
             Write(main_title),
@@ -27,6 +28,15 @@ class TitleSlide(PPTXScene):
         FadeOut(authors), FadeOut(discrete)
       )
       self.endSlide()
+
+class History(PPTXScene):
+    def construct(self):
+        title_short = Title(r"The History")
+
+        self.play(
+            Write(title_short)
+        )
+        self.endSlide()
 
 class FibEx(PPTXScene):
     def construct(self):
@@ -155,8 +165,8 @@ class sternBrocotTree(PPTXScene):
         )
         self.endSlide()
 
-        l0_1=Line(f0.get_center(), f2.get_center())
-        l0_2=Line(f1.get_center(), f2.get_center())
+        l0_1=Line(f0.get_center(), f2.get_center(), buff=0.4)
+        l0_2=Line(f1.get_center(), f2.get_center(), buff=0.4)
 
         self.play(
             FadeIn(l0_1),
@@ -165,29 +175,93 @@ class sternBrocotTree(PPTXScene):
         )
         self.endSlide()
 
-class mediantExample(PPTXScene):
-    def construct(self):
-        title_short = Title(r"Mediant")
-        self.add(title_short)
-
-        mediant = MathTex(r"\frac {p}{q} \oplus \frac {p'}{q'} = \frac {p + p'}{q + q'}")
-        self.add(mediant)
+        self.play(
+            f2.animate.shift(UP*2)
+        )
+        self.endSlide()
+        
+        l0_1_1=Line(f0.get_center(), f2.get_center(), buff=0.4)
+        l0_2_1=Line(f1.get_center(), f2.get_center(), buff=0.4)
 
         self.play(
-            Write(title_short),
-            Write(mediant)
+            ReplacementTransform(l0_1, l0_1_1),
+            ReplacementTransform(l0_2, l0_2_1)
         )
         self.endSlide()
 
-        img1 = ImageMobject(r"/Users/jlefkoff/Pictures/screenshots/Screen Shot 2022-04-26 at 6.46.49 PM.png")
-        img1.scale(0.5)
-        img1.move_to(LEFT)
-        self.add(img1)
+        f3.shift(LEFT*3)
+        f4.shift(RIGHT*3)
+
+        l1_1=Line(f2.get_center(), f3.get_center(), buff=0.4)
+        l1_2=Line(f2.get_center(), f4.get_center(), buff=0.4)
 
         self.play(
-            FadeOut(title_short),
-            FadeOut(mediant),
-            FadeIn(img1)
+            f2.animate.move_to(UP*2),
+            FadeIn(l1_1),
+            FadeIn(l1_2),
+            Write(f3),
+            Write(f4)
+        )
+        self.endSlide()
+
+        f5.shift(LEFT*4,DOWN*2)
+        f6.shift(LEFT*1.5,DOWN*2)
+        f7.shift(RIGHT*1.5,DOWN*2)
+        f8.shift(RIGHT*4,DOWN*2)
+
+        l2_1 = Line(f3.get_center(), f5.get_center(), buff=0.4)
+        l2_2 = Line(f3.get_center(), f6.get_center(), buff=0.4)
+        l2_3 = Line(f4.get_center(), f7.get_center(), buff=0.4)
+        l2_4 = Line(f4.get_center(), f8.get_center(), buff=0.4)
+
+        self.play(
+            FadeIn(l2_1),
+            FadeIn(l2_2),
+            FadeIn(l2_3),
+            FadeIn(l2_4),
+            Write(f5),
+            Write(f6),
+            Write(f7),
+            Write(f8)
+        )
+        self.endSlide()
+
+class mediantExample(PPTXScene):
+    def construct(self):
+        title_short = Title(r"Clock Example")
+        self.add(title_short)
+
+        mediant = MathTex(r"\frac{1}{720}=\frac{1}{10\times 8\times 9}=\frac{1}{10}\times\frac{1}{8}\times\frac{1}{9}")
+        mediant.shift(RIGHT,UP*2)
+
+        img1 = ImageMobject(r"/Users/jlefkoff/Pictures/screenshots/Screen Shot 2022-04-27 at 12.57.09 PM.png")
+        img1.scale(0.5)
+        img1.move_to(ORIGIN)
+
+        img2 = ImageMobject(r"/Users/jlefkoff/Pictures/screenshots/Screen Shot 2022-04-27 at 12.57.16 PM.png")
+        img2.scale(0.5)
+        img2.shift(LEFT*2,DOWN*2)
+
+        self.play(
+            FadeIn(img1), run_time=2
+        )
+        self.endSlide()
+
+        self.play(
+            FadeOut(img1),
+            Write(title_short),
+            Write(mediant),
+            FadeIn(img2)
+        )
+        self.endSlide()
+
+class ThankYou(PPTXScene):
+    def construct(self):
+        main_title = Tex(r"Thank you!")
+        self.add(main_title)
+
+        self.play(
+            Write(main_title)
         )
         self.endSlide()
 
@@ -195,10 +269,12 @@ class mediantExample(PPTXScene):
 # define the set of slides you want
 slides = [
     TitleSlide,
+    History,
     FibEx,
     SimpleSternSeq,
     sternBrocotTree,
-    mediantExample
+    mediantExample,
+    ThankYou
 ]
 
 
