@@ -1,6 +1,7 @@
 # 1800-Project
 
-A Northeastern University Discrete Structures (CS1800) final project by Conor Doyle, Karthik Yalala, and Jonah Lefkoff
+A Northeastern University Discrete Structures (CS1800) final project.
+Created by Conor Doyle, Karthik Yalala, and Jonah Lefkoff
 
 This project contains code to render a series of animations made using the manim library. 
 
