@@ -132,28 +132,62 @@ class SimpleSternSeq(PPTXScene):
         )
         self.endSlide()
 
-class mediantExample(PPTXScene):
+class sternBrocotTree(PPTXScene):
     def construct(self):
-        number_plane = NumberPlane(
-            x_range=[-10, 10, 1],
-            y_range=[-10, 10, 1],
-            background_line_style={
-                "stroke_color": TEAL,
-                "stroke_width": 4,
-                "stroke_opacity": 0.6
-            }
+
+        f0 = MathTex(r"\frac {0}{1}")
+        f1 = MathTex(r"\frac {1}{0}")
+        f2 = MathTex(r"\frac {1}{1}")
+        f3 = MathTex(r"\frac {1}{2}")
+        f4 = MathTex(r"\frac {2}{1}")
+        f5 = MathTex(r"\frac {1}{3}")
+        f6 = MathTex(r"\frac {2}{3}")
+        f7 = MathTex(r"\frac {3}{2}")
+        f8 = MathTex(r"\frac {3}{1}")
+
+        self.add(f0, f1)
+        f0.shift(LEFT*4,UP*3)
+        f1.shift(RIGHT*4,UP*3)
+       
+        self.play(
+            Write(f0),
+            Write(f1)
         )
+        self.endSlide()
 
-        self.add(number_plane)
-
-        p1 = [10,10,0]
-        mediant_line = Line(ORIGIN,p1)
-
-        self.add(mediant_line)
+        l0_1=Line(f0.get_center(), f2.get_center())
+        l0_2=Line(f1.get_center(), f2.get_center())
 
         self.play(
-            Create(number_plane),
-            Create(mediant_line)
+            FadeIn(l0_1),
+            FadeIn(l0_2),
+            Write(f2)
+        )
+        self.endSlide()
+
+class mediantExample(PPTXScene):
+    def construct(self):
+        title_short = Title(r"Mediant")
+        self.add(title_short)
+
+        mediant = MathTex(r"\frac {p}{q} \oplus \frac {p'}{q'} = \frac {p + p'}{q + q'}")
+        self.add(mediant)
+
+        self.play(
+            Write(title_short),
+            Write(mediant)
+        )
+        self.endSlide()
+
+        img1 = ImageMobject(r"/Users/jlefkoff/Pictures/screenshots/Screen Shot 2022-04-26 at 6.46.49 PM.png")
+        img1.scale(0.5)
+        img1.move_to(LEFT)
+        self.add(img1)
+
+        self.play(
+            FadeOut(title_short),
+            FadeOut(mediant),
+            FadeIn(img1)
         )
         self.endSlide()
 
@@ -163,6 +197,7 @@ slides = [
     TitleSlide,
     FibEx,
     SimpleSternSeq,
+    sternBrocotTree,
     mediantExample
 ]
 
